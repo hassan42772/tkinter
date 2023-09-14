@@ -1,0 +1,62 @@
+from tkinter import *
+import pygame
+from tkinter import filedialog
+import time
+import tkinter.ttk as ttk
+from mutagen.mp3 import MP3
+root = Tk()
+root.title(" Music player")
+root.geometry("500x450")
+
+pygame.mixer.init()
+
+
+my_menu = Menu(root)
+root.config(menu=my_menu)
+add_songs_menu = Menu(my_menu)
+delete_songs_menu = Menu(my_menu)
+my_menu.add_cascade(label="Add song", menu=add_songs_menu)
+my_menu.add_cascade(label="Delete song", menu=delete_songs_menu)
+add_songs_menu.add_command(label="Add one song")
+add_songs_menu.add_command(label="Add many songs")
+delete_songs_menu.add_command(label="Delete one song")
+delete_songs_menu.add_command(label="Delete many songs")
+box_frame = Frame(root)
+box_frame.pack()
+# list box
+song_box = Listbox(box_frame, bg="RED", fg="GREY", width=60, selectbackground="#7600bc",
+                   selectforeground="white")
+song_box.pack()
+forward_btn_img =PhotoImage(file="images/forward.jpg")
+back_btn_img = PhotoImage(file="images/back.jpg")
+pause_btn_img = PhotoImage(file="images/pause.jpg")
+play_btn_img = PhotoImage(file="images/play.jpg")
+stop_btn_img = PhotoImage(file="images/stop.jpg")
+box_frame = Frame(root)
+box_frame.pack()
+# buttons
+button_frame = Frame(root)
+button_frame.pack()
+forward_btn = Button(button_frame, image=forward_btn_img, borderwidth=0)
+forward_btn.grid(row=0, column=1, padx=10)
+back_btn = Button(button_frame, image=back_btn_img, borderwidth=0)
+back_btn.grid(row=0, column=0, padx=10)
+pause_btn = Button(button_frame, image=pause_btn_img, borderwidth=0)
+pause_btn.grid(row=0, column=3, padx=10)
+play_btn = Button(button_frame, image=play_btn_img, borderwidth=0)
+play_btn.grid(row=0, column=2, padx=10)
+stop_btn = Button(button_frame, image=stop_btn_img, borderwidth=0)
+stop_btn.grid(row=0, column=4, padx=10)
+# # design
+style = ttk.Style()
+style.theme_use("default")
+style.configure("Horizontal.TScale", background="BLACK", troughcolor="WHITE")
+# scale
+
+my_slider = ttk.Scale(root, from_=0, to=100, orient=HORIZONTAL, value=0, length=400)
+my_slider.pack(pady=20)
+
+status_bar = Label(root, text="", bd=1, relief=GROOVE, anchor=E)
+status_bar.pack(fill=X, side=BOTTOM, ipady=2)
+
+root.mainloop()
